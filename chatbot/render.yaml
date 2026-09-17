@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: libertapp-chatbot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: LLM_BASE_URL
+        value: https://generativelanguage.googleapis.com/v1beta/openai/
+      - key: LLM_MODEL
+        value: gemini-3.6-flash
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_TEMPERATURE
+        value: "0.6"
+      - key: MEMORY_LIMIT
+        value: "20"
+      - key: RECENT_MESSAGES_COUNT
+        value: "10"
+      - key: CORS_ORIGINS
+        value: '["*"]'
