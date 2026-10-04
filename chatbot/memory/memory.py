@@ -19,8 +19,13 @@ redis_client = None
 if settings.redis_url:
     try:
         import redis
+        url = settings.redis_url.strip()
+        # Upstash exige SSL/TLS (--tls). No Python redis-py, o protocolo com TLS é 'rediss://'
+        if url.startswith("redis://") and "upstash.io" in url:
+            url = "rediss://" + url[len("redis://"):]
+
         redis_client = redis.from_url(
-            settings.redis_url,
+            url,
             decode_responses=True,
             socket_timeout=5.0
         )
