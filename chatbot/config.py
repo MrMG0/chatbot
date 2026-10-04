@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     # LLM Settings
     llm_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai/"
     llm_api_key: str = ""
-    llm_model: str = "gemini-3.6-flash"
+    llm_model: str = "gemini-flash-lite-latest"
     llm_temperature: float = 0.6
     llm_timeout: float = 60.0
     llm_max_retries: int = 2
@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     recent_messages_count: int = 10
     max_active_users: int = 1000
     user_session_ttl_hours: int = 24
+    redis_url: str = ""
 
     # API Settings
     cors_origins: list[str] = ["*"]
